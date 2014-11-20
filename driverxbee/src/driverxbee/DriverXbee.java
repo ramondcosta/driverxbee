@@ -31,7 +31,11 @@ public class DriverXbee {
         // Envia o pacote
         con.setDoOutput(true);
         DataOutputStream write = new DataOutputStream(con.getOutputStream());
-        write.writeBytes(parameters);
+        //OutputStreamWriter out = new OutputStreamWriter(con.getOutputStream());
+        //out.write(parameters);
+        //out.flush();
+        //out.close();
+        write.writeChars(parameters);
         write.flush();
         write.close();
         con.disconnect();
