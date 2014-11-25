@@ -25,17 +25,19 @@ public class DriverXbee {
         parameters = "sensor="+status+"";
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-        con.setRequestMethod("POST");
-        con.setRequestProperty("User-Agent", "WiserTool1.0");
-        
-        // Envia o pacote
         con.setDoOutput(true);
+        con.setRequestMethod("POST");
+        con.setRequestProperty("charset", "utf-8");
+        con.setRequestProperty("User-Agent", "WiserTool1.0");
+        con.connect();
+        // Envia o pacote
+      
         DataOutputStream write = new DataOutputStream(con.getOutputStream());
         //OutputStreamWriter out = new OutputStreamWriter(con.getOutputStream());
         //out.write(parameters);
         //out.flush();
         //out.close();
-        write.writeChars(parameters);
+        write.writeUTF(parameters);
         write.flush();
         write.close();
         con.disconnect();
